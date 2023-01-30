@@ -1,5 +1,6 @@
 const express = require('express')
 const path =require('path');
+var mysql=require("mysql");
 var bodyparser=require("body-parser");
 const app = express()
 const port = 3000
@@ -15,8 +16,26 @@ let options={
 
 
 app.post("/",(req,res)=>{
-    console.log(req.body);
-    res.send("recibiendo datos..")
+    var conn=mysql.createConnection({
+        host:'localhost',
+        user:'root',
+        password:'',
+        database:'biblioteca'
+    });
+    conn.connect();
+    var sql=`insert into libros
+     (codigo,titulo,genero)
+     values ('${req.body.codigo}','${req.body.titulo}','${req.body.genero}')`;
+    conn.query(sql,(err,result,field)=>{
+        if(err){
+            console.log(err);
+        }
+        console.log(result)
+        res.send("recibiendo datos..")
+        conn.end();
+    })
+     
+    
 })
 
 
