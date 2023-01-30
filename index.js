@@ -28,14 +28,14 @@ app.post("/",(req,res)=>{
         'titulo':req.body.titulo,
         'genero':req.body.genero
     }
-    var sql=`insert into libros
-     set ?`;
+    var sql=`insert into libros set ?`;
     conn.query(sql,libro,(err,result,field)=>{
         if(err){
             console.log(err);
+            res.send("Error conectando a la bbdd");
         }
         console.log(result)
-        res.send("recibiendo datos..")
+        res.redirect("/");
         conn.end();
     })
      
