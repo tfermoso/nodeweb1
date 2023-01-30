@@ -23,10 +23,14 @@ app.post("/",(req,res)=>{
         database:'biblioteca'
     });
     conn.connect();
+    var libro={
+        'codigo':req.body.codigo,
+        'titulo':req.body.titulo,
+        'genero':req.body.genero
+    }
     var sql=`insert into libros
-     (codigo,titulo,genero)
-     values ('${req.body.codigo}','${req.body.titulo}','${req.body.genero}')`;
-    conn.query(sql,(err,result,field)=>{
+     set ?`;
+    conn.query(sql,libro,(err,result,field)=>{
         if(err){
             console.log(err);
         }
