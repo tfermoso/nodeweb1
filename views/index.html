@@ -54,7 +54,11 @@
     </table>
     <script>
         $(document).ready(function () {
-            $('#tblLibros').DataTable();
+            $('#tblLibros').DataTable({
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json'
+                }
+            });
         });
     </script>
 </body>
