@@ -4,8 +4,9 @@ var mysql = require("mysql");
 const fs = require('fs');
 var bodyparser = require("body-parser");
 const app = express()
-const port = 3000
+const port = 3000;
 
+app.use(express.static('public'))
 app.use(bodyparser.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
